@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Digital Clock</title>
+    <link rel="stylesheet" href="css/digital clock.css">
+</head>
+<body>
+    <h1>Digital Clock</h1>
+    <div id="clock"></div>
+    <script>
+        function showTime() {
+            let date = new Date();
+            let hours = date.getHours();
+            let minutes = date.getMinutes();
+            let seconds = date.getSeconds();
+            let amOrPm = hours < 12 ? 'AM' : 'PM';
+
+            if (hours === 0) {
+                hours = 12;
+            } else if (hours > 12) {
+                hours = hours - 12;
+            }
+        
+            hours = addZero(hours);
+            minutes = addZero(minutes);
+            seconds = addZero(seconds);
+        
+            let time = `${hours}:${minutes}:${seconds} ${amOrPm}`;
+            document.getElementById('clock').innerText = time;
+        
+            setTimeout(showTime, 1000);
+        }
+
+        function addZero(number) {
+            if (number < 10) {
+                number = '0' + number;
+            }
+            return number;
+        }
+
+showTime();
+
+    </script>
+</body>
+</html>

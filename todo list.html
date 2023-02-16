@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="css/todo list.css">
+</head>
+<body>
+    <div class="container">
+        <h1>To-Do List</h1>
+        <form>
+            <input type="text" id="new-task" placeholder="Add a task...">
+            <button type="submit" id="add-btn">Add</button>
+        </form>
+        <ul id="task-list"></ul>
+    </div>
+    <script>
+        let taskList = [];
+
+        function addTask(e) {
+            e.preventDefault();
+            let newTask = document.getElementById('new-task').value;
+            if (newTask) {
+                taskList.push(newTask);
+                displayTasks();
+                document.getElementById('new-task').value = '';
+            }
+        }
+
+        function deleteTask(index) {
+            taskList.splice(index, 1);
+            displayTasks();
+        }
+
+        function displayTasks() {
+            let list = document.getElementById('task-list');
+            list.innerHTML = '';
+            for (let i = 0; i < taskList.length; i++) {
+                let li = document.createElement('li');
+                li.innerHTML = `<span>${taskList[i]}</span><button onclick="deleteTask(${i})">X</button>`;
+                list.appendChild(li);
+            }
+        }
+
+        document.getElementById('add-btn').addEventListener('click', addTask);
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stopwatch</title>
+    <link rel="stylesheet" href="css/stop watch.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Stopwatch</h1>
+        <div class="display">00:00:00</div>
+        <div class="controls">
+            <button id="start-btn">Start</button>
+            <button id="stop-btn">Stop</button>
+            <button id="reset-btn">Reset</button>
+        </div>
+    </div>
+    <script>
+        let stopwatch;
+        let time = 0;
+        let running = false;
+
+        function updateTime() {
+            time++;
+            let hours = Math.floor(time / 3600).toString().padStart(2, '0');
+            let minutes = Math.floor((time % 3600) / 60).toString().padStart(2, '0');
+            let seconds = (time % 60).toString().padStart(2, '0');
+            document.querySelector('.display').textContent = `${hours}:${minutes}:${seconds}`;
+        }
+
+        function startStopwatch() {
+            if (!running) {
+                stopwatch = setInterval(updateTime, 1000);
+                running = true;
+                document.getElementById('start-btn').disabled = true;
+                document.getElementById('stop-btn').disabled = false;
+                document.getElementById('reset-btn').disabled = false;
+            }
+        }
+
+        function stopStopwatch() {
+            clearInterval(stopwatch);
+            running = false;
+            document.getElementById('start-btn').disabled = false;
+            document.getElementById('stop-btn').disabled = true;
+        }
+        
+        function resetStopwatch() {
+            clearInterval(stopwatch);
+            time = 0;
+            running = false;
+            document.querySelector('.display').textContent = '00:00:00';
+            document.getElementById('start-btn').disabled = false;
+            document.getElementById('stop-btn').disabled = true;
+            document.getElementById('reset-btn').disabled = true;
+        }
+        
+        document.getElementById('start-btn').addEventListener('click', startStopwatch);
+        document.getElementById('stop-btn').addEventListener('click', stopStopwatch);
+        document.getElementById('reset-btn').addEventListener('click', resetStopwatch);
+        document.getElementById('stop-btn').disabled = true;
+        document.getElementById('reset-btn').disabled = true;
+
+    </script>
+</body>
+</html>
