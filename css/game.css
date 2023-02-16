@@ -1,0 +1,36 @@
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    width: 300px;
+    height: 300px;
+    margin: 0 auto;
+  }
+  
+  .cell {
+    border: 1px solid black;
+    font-size: 72px;
+    text-align: center;
+    line-height: 1;
+    cursor: pointer;
+  }
+  
+  .cell:hover {
+    background-color: #eee;
+  }
+  
+  .cell.x {
+    color: red;
+  }
+  
+  .cell.o {
+    color: blue;
+  }
+  
+  button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px;
+    font-size: 20px;
+  }
+  

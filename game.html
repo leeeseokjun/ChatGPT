@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <title>Tic Tac Toe</title>
+    <link rel="stylesheet" href="css/game.css">
+</head>
+<body>
+    <h1>Tic Tac Toe</h1>
+    <div class="board">
+        <div class="cell" id="0"></div>
+        <div class="cell" id="1"></div>
+        <div class="cell" id="2"></div>
+        <div class="cell" id="3"></div>
+        <div class="cell" id="4"></div>
+        <div class="cell" id="5"></div>
+        <div class="cell" id="6"></div>
+        <div class="cell" id="7"></div>
+        <div class="cell" id="8"></div>
+    </div>
+    <button id="reset">Reset</button>
+    <script>
+        let cells = document.querySelectorAll('.cell');
+        let resetButton = document.getElementById('reset');
+
+        let currentPlayer = 'x';
+        let board = ['', '', '', '', '', '', '', '', ''];
+
+        cells.forEach(cell => {
+            cell.addEventListener('click', () => {
+                if (cell.innerHTML === '') {
+                    cell.classList.add(currentPlayer);
+                    cell.innerHTML = currentPlayer;
+                    let cellIndex = parseInt(cell.id);
+                    board[cellIndex] = currentPlayer;
+                    checkWin();
+                    togglePlayer();
+                }
+            });
+        });
+
+        resetButton.addEventListener('click', () => {
+            cells.forEach(cell => {
+                cell.classList.remove('x', 'o');
+                cell.innerHTML = '';
+        });
+        currentPlayer = 'x';
+        board = ['', '', '', '', '', '', '', '', ''];
+        });
+
+        function togglePlayer() {
+            if (currentPlayer === 'x') {
+            currentPlayer = 'o';
+        } else {
+            currentPlayer = 'x';
+        }
+        }
+
+        function checkWin() {
+            let winningCombos = [
+                [0, 1, 2],
+                [3, 4, 5],
+                [6, 7, 8],
+                [0, 3, 6],
+                [1, 4, 7],
+                [2, 5, 8],
+                [0, 4, 8],
+                [2, 4, 6]
+            ];
+            for (let i = 0; i < winningCombos.length; i++) {
+                let combo = winningCombos[i];
+                if (
+                    board[combo[0]] !== '' &&
+                    board[combo[0]] === board[combo[1]] &&
+                    board[combo[1]] === board[combo[2]]
+                ) {
+                    alert(`${currentPlayer} wins!`);
+                }
+            }
+        }
+    </script>
+</body>
+</html>
